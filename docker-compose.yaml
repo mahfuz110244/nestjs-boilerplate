@@ -2,9 +2,9 @@ version: '3'
 
 services:
   postgres:
-    image: postgres:14.1
+    image: postgres:latest
     ports:
-      - ${DATABASE_PORT}:5432
+      - ${DATABASE_PORT}:5434
     volumes:
       - ./.data/db:/var/lib/postgresql/data
     environment:
@@ -29,7 +29,7 @@ services:
   redis:
     image: redis:6-alpine
     ports:
-      - 6379:6379
+      - 6380:6379
     depends_on:
       - postgres
 
