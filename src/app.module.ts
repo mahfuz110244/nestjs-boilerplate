@@ -27,6 +27,8 @@ import { MailConfigService } from './mail/mail-config.service';
 import { ForgotModule } from './forgot/forgot.module';
 import { MailModule } from './mail/mail.module';
 import { HomeModule } from './home/home.module';
+import { PokemonModule } from './pokemon/pokemon.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -77,6 +79,8 @@ import { HomeModule } from './home/home.module';
     ForgotModule,
     MailModule,
     HomeModule,
+    PokemonModule,
+    ProductsModule,
   ],
 })
 export class AppModule {}

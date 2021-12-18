@@ -1,7 +1,7 @@
 import { Controller, Request, UseGuards } from '@nestjs/common';
 import { Crud, CrudController, Override } from '@nestjsx/crud';
-import { Pokemon } from './pokemon.entity';
-import { PokemonService } from './pokemon.service';
+import { Product } from './product.entity';
+import { ProductsService } from './products.service';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Roles } from '../roles/roles.decorator';
@@ -9,14 +9,14 @@ import { RoleEnum } from '../roles/roles.enum';
 import { RolesGuard } from '../roles/roles.guard';
 import validationOptions from 'src/utils/validation-options';
 
-// @ApiBearerAuth()
-// @Roles(RoleEnum.admin)
-// @UseGuards(AuthGuard('jwt'), RolesGuard)
-@ApiTags('Pokemons')
+@ApiBearerAuth()
+@Roles(RoleEnum.admin)
+@UseGuards(AuthGuard('jwt'), RolesGuard)
+@ApiTags('Products')
 @Crud({
   validation: validationOptions,
   model: {
-    type: Pokemon,
+    type: Product,
   },
   query: {
     maxLimit: 50,
@@ -24,13 +24,13 @@ import validationOptions from 'src/utils/validation-options';
   },
 })
 @Controller({
-  path: 'pokemon',
+  path: 'products',
   version: '1',
 })
-export class PokemonController implements CrudController<Pokemon> {
-  constructor(public service: PokemonService) {}
+export class ProductsController implements CrudController<Product> {
+  constructor(public service: ProductsService) {}
 
-  get base(): CrudController<Pokemon> {
+  get base(): CrudController<Product> {
     return this;
   }
 

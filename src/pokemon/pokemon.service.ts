@@ -28,6 +28,7 @@ export class PokemonService extends TypeOrmCrudService<Pokemon> {
   }
 
   async saveEntity(data: DeepPartial<Pokemon>) {
+    console.log(data);
     return this.pokemonRepository.save(this.pokemonRepository.create(data));
   }
 
