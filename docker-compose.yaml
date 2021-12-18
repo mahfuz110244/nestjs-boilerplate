@@ -4,7 +4,7 @@ services:
   postgres:
     image: postgres:latest
     ports:
-      - ${DATABASE_PORT}:5434
+      - ${DATABASE_PORT}:5432
     volumes:
       - ./.data/db:/var/lib/postgresql/data
     environment:
