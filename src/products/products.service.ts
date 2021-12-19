@@ -37,7 +37,18 @@ export class ProductsService extends TypeOrmCrudService<Product> {
   }
 
   async productCreate(dto: ProductDto): Promise<void> {
-    const product = await this.saveEntity({
+    const product = await this.productsRepository.saveEntity({
+      ...dto,
+      name: dto.name,
+      description: dto.description
+    });
+  }
+
+  async productUpdate(id: number, dto: ProductDto): Promise<void> {
+    const product = this.productsRepository.find({
+      where: id,
+    });
+    await this.saveEntity({
       ...dto,
       name: dto.name,
       description: dto.description

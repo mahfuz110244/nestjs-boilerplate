@@ -6,6 +6,7 @@ import {
   HttpStatus,
   Request,
   Post,
+  Put,
   UseGuards,
   Patch,
   Delete,
@@ -51,6 +52,12 @@ export class ProductsController implements CrudController<Product> {
   @HttpCode(HttpStatus.CREATED)
   async productCreate(@Body() productDto: ProductDto) {
     return this.service.productCreate(productDto);
+  }
+
+  @Put('crud')
+  @HttpCode(HttpStatus.OK)
+  async productUpdate(@Request() request, @Body() productDto: ProductDto) {
+    return this.service.productUpdate(request.id, productDto);
   }
 
 
