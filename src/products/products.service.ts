@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { FindOptions } from 'src/utils/types/find-options.type';
 import { DeepPartial } from 'src/utils/types/deep-partial.type';
+import { ProductDto } from './dto/product.dto';
 
 @Injectable()
 export class ProductsService extends TypeOrmCrudService<Product> {
@@ -33,5 +34,13 @@ export class ProductsService extends TypeOrmCrudService<Product> {
 
   async softDelete(id: number): Promise<void> {
     await this.productsRepository.softDelete(id);
+  }
+
+  async productCreate(dto: ProductDto): Promise<void> {
+    const product = await this.saveEntity({
+      ...dto,
+      name: dto.name,
+      description: dto.description
+    });
   }
 }

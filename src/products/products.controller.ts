@@ -1,4 +1,15 @@
-import { Controller, Request, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Request,
+  Post,
+  UseGuards,
+  Patch,
+  Delete,
+} from '@nestjs/common';
 import { Crud, CrudController, Override } from '@nestjsx/crud';
 import { Product } from './product.entity';
 import { ProductsService } from './products.service';
@@ -8,6 +19,7 @@ import { Roles } from '../roles/roles.decorator';
 import { RoleEnum } from '../roles/roles.enum';
 import { RolesGuard } from '../roles/roles.guard';
 import validationOptions from 'src/utils/validation-options';
+import { ProductDto } from './dto/product.dto';
 
 @ApiBearerAuth()
 @Roles(RoleEnum.admin)
@@ -33,6 +45,14 @@ export class ProductsController implements CrudController<Product> {
   get base(): CrudController<Product> {
     return this;
   }
+
+
+  @Post('crud')
+  @HttpCode(HttpStatus.CREATED)
+  async productCreate(@Body() productDto: ProductDto) {
+    return this.service.productCreate(productDto);
+  }
+
 
   @Override()
   async deleteOne(@Request() request) {
